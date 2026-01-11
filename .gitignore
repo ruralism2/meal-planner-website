@@ -1,0 +1,13 @@
+# Ignore the other project folder
+/debate/
+
+# Ignore IDE and OS files
+.vscode/
+.idea/
+desktop.ini
+*.lnk
+
+# Ignore node_modules
+node_modules/
+/node_modules/
+**/node_modules/

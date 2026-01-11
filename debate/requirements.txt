@@ -1,6 +1,0 @@
-streamlit
-requests
-ollama
-Flask
-google-generativeai
-flask-cors
