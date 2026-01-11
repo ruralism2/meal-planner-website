@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주간 식단 추천</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>주간 식단 추천</h1>
+            <p>냉장고 속 재료를 입력하면 1주일 식단을 추천해드려요.</p>
+        </header>
+
+        <main>
+            <div class="ingredient-input-section">
+                <label for="ingredient-input">재료 입력 (쉼표로 구분)</label>
+                <input type="text" id="ingredient-input" placeholder="예: 돼지고기, 김치, 양파, 계란">
+                <button id="generate-plan-btn">식단 생성하기</button>
+            </div>
+
+            <div id="meal-plan-container">
+                <!-- 자바스크립트로 생성된 식단표가 여기에 표시됩니다. -->
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
