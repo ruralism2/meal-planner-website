@@ -56,27 +56,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     generatePlanBtn.addEventListener('click', generateMealPlan);
 
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
+function findMatchingRecipes(userIngredients, mealType) {
+        const scoredRecipes = recipes
+            .filter(recipe => recipe.mealType.includes(mealType)) // 1. 식사 종류로 먼저 필터링
+            .map(recipe => {
+                // 2. 각 레시피의 점수 계산
+                const matchedIngredients = recipe.ingredients.filter(reqIngredient =>
+                    userIngredients.some(userIng => userIng.includes(reqIngredient) || reqIngredient.includes(userIng))
+                );
+                const matchScore = matchedIngredients.length;
+                const missingCount = recipe.ingredients.length - matchScore;
 
-    function findMatchingRecipes(userIngredients, mealType) {
-        let matched = recipes.filter(recipe => {
-            // 요리 타입이 일치하는지 확인
-            const typeMatches = recipe.mealType.includes(mealType);
-            if (!typeMatches) return false;
+                return { ...recipe, matchScore, missingCount };
+            })
+            .filter(recipe => recipe.matchScore > 0); // 3. 일치하는 재료가 하나라도 있는 레시피만 선택
 
-            // 모든 필수 재료가 사용자의 냉장고에 있는지 확인
-            const allIngredientsMatch = recipe.ingredients.every(reqIngredient =>
-                userIngredients.some(userIng => userIng.includes(reqIngredient) || reqIngredient.includes(userIng))
-            );
-            return allIngredientsMatch;
+        // 4. 가장 일치하는 재료가 많고, 그 다음으로 부족한 재료가 적은 순으로 정렬
+        scoredRecipes.sort((a, b) => {
+            if (b.matchScore !== a.matchScore) {
+                return b.matchScore - a.matchScore;
+            }
+            return a.missingCount - b.missingCount;
         });
-        return shuffleArray(matched); // 매번 다른 순서로 추천하기 위해 섞음
+
+        return scoredRecipes;
     }
 
     function createWeeklyPlan(userIngredients) {
