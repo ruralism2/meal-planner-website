@@ -1,12 +1,12 @@
 :root {
-    --bg-color: #fdfaf6;
-    --text-color: #4a4a4a;
-    --primary-color: #f57d42;
-    --primary-hover-color: #e06c30;
+    --bg-color: #f8f9fa;
+    --text-color: #525266;
+    --primary-color: #a29bfe;
+    --primary-hover-color: #8d84e8;
     --container-bg: #ffffff;
-    --table-header-bg: #fff5ee;
-    --border-color: #ebe3d9;
-    --shadow-color: rgba(0, 0, 0, 0.06);
+    --table-header-bg: #f1f0ff;
+    --border-color: #e9e9f2;
+    --shadow-color: rgba(141, 132, 232, 0.1);
 }
 
 body {
